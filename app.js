@@ -1,10 +1,13 @@
 const express = require('express')
 const mongoose = require('mongoose')
 
+const route_user = require('./routes/route_user')
+const Sauces = require('./models/model_sauce');
+
 //on se connecte à la base de donnée
 mongoose.connect('mongodb+srv://GMaxDev:VtUflowp6X4kSJ6N@cluster0.dn1raoi.mongodb.net/?retryWrites=true&w=majority',
     { useNewUrlParser: true,
-        useUnifiedTopology: true })
+    useUnifiedTopology: true })
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
@@ -22,22 +25,6 @@ app.use((req, res, next) => {
 
 //------------------------------
 
-app.use((req, res, next) =>{
-    console.log('requete recu')
-    next()
-})
-
-app.use((req, res, next) => {
-    res.status(201)
-    next()
-})
-app.use((req, res, next) => {
-    res.json({message:'Requete recu'})
-    next()
-})
-
-app.use((req, res) => {
-    console.log('rep envoyé avec succès')
-})
+app.use('/api/auth/signup', route_user)
 
 module.exports = app
