@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 const route_user = require('./routes/route_user')
-const Sauces = require('./models/model_sauce');
+const route_sauce = require('./routes/route_sauce')
 
 //on se connecte à la base de donnée
 mongoose.connect('mongodb+srv://GMaxDev:VtUflowp6X4kSJ6N@cluster0.dn1raoi.mongodb.net/?retryWrites=true&w=majority',
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 //------------------------------
-
-app.use('/api/auth/signup', route_user)
+app.use('/api/sauces', route_sauce)
+app.use('/api/auth', route_user)
 
 module.exports = app
